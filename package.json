@@ -1,21 +1,22 @@
 {
   "name": "@markjameshoward/twlit",
-  "version": "0.0.1",
+  "version": "0.0.1-alpha.9",
   "description": "",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "main": "./bin/index.js",
+  "bin": {
+    "twlit": "./bin/index.js"
   },
-  "main": "./src/main.js",
   "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "^5.0.4",
-    "yargs": "^17.7.2"
+    "typescript": "^5.0.4"
   },
   "dependencies": {
+    "yargs": "^17.7.2",
     "@types/node": "^20.2.3",
-    "@types/yargs": "^17.0.24"
+    "@types/yargs": "^17.0.24",
+    "tailwindcss": "^3.3.2"
   }
 }
