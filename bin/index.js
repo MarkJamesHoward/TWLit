@@ -13,7 +13,17 @@ const output = argv.output ?? "./ReadyForLitimport.js";
 console.log(`Reading from file ${input}`);
 console.log(`Writing to ${output}`);
 
-fs.watchFile(input, () => {
+console.log("pausing for first generation of tailwind file..");
+
+await sleep(5000);
+
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
+fs.watchFile(input, { interval: 1000 }, () => {
   const contents = fs.readFileSync(input, "utf8");
 
   const cleanContents = contents.replaceAll("`", "");
