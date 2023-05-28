@@ -15,23 +15,20 @@ console.log(`Writing to ${output}`);
 
 console.log("pausing for first generation of tailwind file..");
 
-await sleep(5000);
-
-function sleep(ms) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
-}
-
 fs.watchFile(input, { interval: 1000 }, () => {
-  const contents = fs.readFileSync(input, "utf8");
+  try {
+    const contents = fs.readFileSync(input, "utf8");
 
-  const cleanContents = contents.replaceAll("`", "");
+    const cleanContents = contents.replaceAll("`", "");
 
-  const litContents = `
-import { css } from "lit"; export const TWStyles = css\` ${cleanContents} \`
-`;
+    const litContents = `
+    import { css } from "lit";
+    export const TWStyles = css\` ${cleanContents} \`
+    `;
 
-  fs.writeFileSync(output, litContents);
-  console.log(`TWLit - wrote to file ${output}`);
+    fs.writeFileSync(output, litContents);
+    console.log(`TWLit - wrote to file ${output}`);
+  } catch (err) {
+    console.log(err);
+  }
 });
