@@ -7,19 +7,15 @@ const argv = yargs(process.argv.slice(2)).argv;
 const input = argv.input ?? "./TailwindGenerated.css";
 const output = argv.output ?? "./ReadyForLitimport.js";
 
-// const input = "./tailwindGenerated.css";
-// const output = "./readyForLitimport.js";
-
 console.log(`Reading from file ${input}`);
 console.log(`Writing to ${output}`);
-
-console.log("pausing for first generation of tailwind file..");
 
 fs.watchFile(input, { interval: 1000 }, () => {
   try {
     const contents = fs.readFileSync(input, "utf8");
 
     const cleanContents = contents.replaceAll("`", "");
+    cleanContents = contents.replaceAll("\\", "\\\\");
 
     const litContents = `
     import { css } from "lit";
