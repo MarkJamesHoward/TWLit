@@ -14,8 +14,8 @@ fs.watchFile(input, { interval: 1000 }, () => {
   try {
     const contents = fs.readFileSync(input, "utf8");
 
-    const cleanContents = contents.replaceAll("`", "");
-    cleanContents = contents.replaceAll("\\", "\\\\");
+    let cleanContents = contents.replaceAll("`", "");
+    cleanContents = cleanContents.replaceAll("\\", "\\\\");
 
     const litContents = `
     import { css } from "lit";

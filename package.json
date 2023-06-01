@@ -1,13 +1,18 @@
 {
   "name": "twlit",
-  "version": "0.0.1-alpha.14",
+  "version": "0.0.1-alpha.21",
   "description": "",
   "main": "./bin/index.js",
   "bin": {
     "twlit": "./bin/index.js"
   },
   "type": "module",
-  "keywords": [],
+  "keywords": [
+    "lit",
+    "litelement",
+    "tailwindcss",
+    "tailwind"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
