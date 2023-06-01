@@ -1,37 +1,43 @@
-#Installation
-npm i twlit -D
+# Overview
 
+This package allows us to utilize TailwindCSS fro within LitElement components.
 
-#Usage:
+We need to setup the TailwindCSS build process as normal (either via running npx tailwindcss or by configuring it as a PostCSS plugind). See the TailwindCSS site for detils on this.
 
-Add to your tooling chain in package.json e.g.
-"scripts": {
-    "dev" : "twlit -i./tw.css -o ./twlit.js"
-}
+Once you have tailwind setup to scan the LitElement for classes and produce a CSS file, TWLit then looks for changes to this file and then creates a JS file from it that can be imported to the Static Styles propert of you LitElement. This gives us a nice DX in that Tailwind classes added to your LitElement are automatically generated and can be used with no manual build step required.
 
-Can be setup alongside Tailwind as below:
- "scripts": {
-    "dev": "concurrently \"tailwindcss -i .\\tailwind\\tailwindlibs.css -o .\\tailwind\\tailwind.css --watch\" \"twlit --input .\\tailwind\\tailwind.css --output .\\tailwind\\twlit.js \" "
-  },
+This approach also means we use the constructable style sheets functionality that LitElement provides and as such the style sheet will not be duplicated if more than one of our LitElement components are present in the application.
 
-#Parameters
---input
-This will be the tailwind generated CSS file 
+# Usage
 
---output
-This is the file that we will import into the styles property within your LitElement
+### Run from the command line
 
-LitElement configuration:
+`npx twlit --input ./tw.css --output ./twlit.js`
 
-We need to import the file produced in the --output using something like
+### Or add to your tooling chain in package.json
 
-`
-import { TWStyles } from "./tailwind/twlit.js";
-`
+`"scripts": {
+"dev" : "twlit --input ./tw.css --output ./twlit.js"
+}`
 
-And then include this in the static Styles property:
+The process will constantly watch the input file and output a new JS file on each change.
 
-`
-static styles = [css``, TWStyles];
-`
+# Parameters
 
+### --input
+
+Specify the location of your tailwind generated CSS file. In the above example this is the 'tw.css' file. This is the file spit out from running either npx tailwindcss or from your PostCSS setup of tailwind. Either way it contains all the class definitions that we need inside of our LitElement
+
+### --output
+
+The output is a JS file that contains all the Tailwind classes within a tagged template literal. This can now be imported into your LitElement
+
+# LitElement configuration:
+
+We need to import the JS file that is spit out (from --output above)
+
+`import { TWStyles } from "./tailwind/twlit.js";`
+
+And then include this in the static Styles property of our LitElement:
+
+` static styles = [css``, TWStyles];  `
