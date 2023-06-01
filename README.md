@@ -8,6 +8,9 @@ Once you have tailwind setup to scan the LitElement for classes and produce a CS
 
 This approach also means we use the constructable style sheets functionality that LitElement provides and as such the style sheet will not be duplicated if more than one of our LitElement components are present in the application.
 
+A Full working example of this in use can be found here:
+https://github.com/MarkJamesHoward/TWLitExampleUse
+
 # Usage
 
 ### Run from the command line
