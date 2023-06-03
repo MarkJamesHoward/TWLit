@@ -3,16 +3,29 @@
 import * as fs from "fs";
 import yargs from "yargs";
 
-const argv = yargs(process.argv.slice(2)).argv;
-const input = argv.input ?? "./TailwindGenerated.css";
-const output = argv.output ?? "./ReadyForLitimport.js";
+let input;
+let output;
+
+try {
+  const argv = yargs(process.argv.slice(2)).argv;
+  input = argv.input ?? "./TailwindGenerated.css";
+  output = argv.output ?? "./ReadyForLitimport.js";
+} catch (e) {
+  console.log(`Error reading input/output parameters ${e}`);
+}
 
 console.log(`Reading from file ${input}`);
 console.log(`Writing to ${output}`);
 
 fs.watchFile(input, { interval: 1000 }, () => {
   try {
-    const contents = fs.readFileSync(input, "utf8");
+    try {
+      const contents = fs.readFileSync(input, "utf8");
+    } catch (e) {
+      console.log(
+        `Failed to read file ${input}. Might just not be created yet? retrying..`
+      );
+    }
 
     let cleanContents = contents.replaceAll("`", "");
     cleanContents = cleanContents.replaceAll("\\", "\\\\");
