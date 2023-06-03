@@ -1,6 +1,6 @@
 # Overview
 
-This package allows us to utilize TailwindCSS fro within LitElement components.
+This package allows us to utilize TailwindCSS from within LitElement components.
 
 We need to setup the TailwindCSS build process as normal (either via running npx tailwindcss or by configuring it as a PostCSS plugind). See the TailwindCSS site for detils on this.
 
