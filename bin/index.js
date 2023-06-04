@@ -19,8 +19,10 @@ console.log(`Writing to ${output}`);
 
 fs.watchFile(input, { interval: 1000 }, () => {
   try {
+    let contents;
+
     try {
-      const contents = fs.readFileSync(input, "utf8");
+       contents = fs.readFileSync(input, "utf8");
     } catch (e) {
       console.log(
         `Failed to read file ${input}. Might just not be created yet? retrying..`
