@@ -44,3 +44,15 @@ We need to import the JS file that is spit out (from --output above)
 And then include this in the static Styles property of our LitElement:
 
 ` static styles = [css``, TWStyles];  `
+
+
+
+# Testing
+
+In the test folder we can run npm i and kick off tailwindcss with
+
+`npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch`
+
+and then from the root folder simply run index.js as below
+
+`node bin/index.js --input ./test/output.css --output ./test/readyforlitimport.js`

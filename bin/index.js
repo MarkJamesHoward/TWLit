@@ -17,12 +17,20 @@ try {
 console.log(`Reading from file ${input}`);
 console.log(`Writing to ${output}`);
 
+//perform initial check to see if file exists
+update();
+
 fs.watchFile(input, { interval: 1000 }, () => {
+  update();
+});
+
+function update() {
   try {
     let contents;
 
     try {
-       contents = fs.readFileSync(input, "utf8");
+      console.log(`Reading file ${input}`)
+      contents = fs.readFileSync(input, "utf8");
     } catch (e) {
       console.log(
         `Failed to read file ${input}. Might just not be created yet? retrying..`
@@ -42,4 +50,4 @@ fs.watchFile(input, { interval: 1000 }, () => {
   } catch (err) {
     console.log(err);
   }
-});
+}
